@@ -47,6 +47,10 @@ int main(int ac, char **av)
     qmlRegisterSingletonType<Profiler>("Profiler", 1, 0, "Singleton", &singletonProvider);
     qmlRegisterUncreatableType<DebuggerConnection>("Profiler", 1, 0, "DebuggerConnection", QLatin1String("Uncreatable type"));
 
+    app.setOrganizationName("Qt Project");
+    app.setOrganizationDomain("qt.io");
+    app.setApplicationName("Qt3D Profiler");
+
     engine.load(QUrl("qrc:/main.qml"));
 
     return app.exec();

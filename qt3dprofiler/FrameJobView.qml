@@ -38,7 +38,7 @@ Item {
     implicitWidth: mainRoot.width
     height: childrenRect.height
 
-    readonly property int barHeight: 35
+    readonly property int barHeight: 64
     readonly property real nsecToMSec: 0.000001
 
     property int threadCount
@@ -194,8 +194,8 @@ Item {
     }
 
     property JobHighlight jobHighLight: JobHighlight {
-        parent: pageSwipeView
-        visible: false
+        parent: frameView
+        opacity: 0.0
         z: 5
     }
 

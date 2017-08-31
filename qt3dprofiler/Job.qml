@@ -75,7 +75,7 @@ Rectangle {
             var pos = pageSwipeView.mapFromItem(ma, ma.mouseX, ma.mouseY)
             frameView.jobHighLight.x = pos.x + 15
             frameView.jobHighLight.y = pos.y + 15
-            frameView.jobHighLight.visible = true
+            frameView.jobHighLight.opacity = 1.0
             frameView.jobHighLight.color = root.color
             frameView.jobHighLight.start = root.start
             frameView.jobHighLight.end = root.end
@@ -87,7 +87,7 @@ Rectangle {
             frameView.jobHighLight.name = root.name
         }
         onExited: {
-            frameView.jobHighLight.visible = false
+            frameView.jobHighLight.opacity = 0.0
         }
     }
 }

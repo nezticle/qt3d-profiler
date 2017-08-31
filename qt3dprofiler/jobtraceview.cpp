@@ -86,9 +86,7 @@ void JobTraceView::setFrameTotalDuration(qreal totalDuration)
 
 void JobTraceView::setFrameStartTime(qreal startTime)
 {
-    qDebug() << "0" << Q_FUNC_INFO << startTime;
     if (m_frameStartTime != startTime) {
-        qDebug() << Q_FUNC_INFO << startTime;
         m_frameStartTime = startTime;
         emit frameStartTimeChanged();
         m_rebuild = true;
@@ -199,8 +197,6 @@ void JobTraceView::buildVisibleModel()
         m_visibleJobsModel->layoutAboutToBeChanged();
         m_visibleJobsModel->layoutChanged();
     }
-
-    qDebug() << t.elapsed();
 }
 
 JobProxyModel::JobProxyModel()

@@ -36,14 +36,22 @@ import QtQuick.Controls.Material 2.1
 import QtQuick.Controls.Styles 1.4
 import QtQml.Models 2.2
 import Profiler 1.0
+import Qt.labs.settings 1.0
 
 Window {
     id: mainRoot
     visible: true
-    width: Screen.desktopAvailableWidth
-    height: Screen.desktopAvailableHeight
     color: "#303030"
     title: "Qt3D Profiler"
+    width: 1280
+    height: 720
+
+    Settings {
+            property alias x: mainRoot.x
+            property alias y: mainRoot.y
+            property alias width: mainRoot.width
+            property alias height: mainRoot.height
+    }
 
     FontLoader {
         id: robotoFont
@@ -52,6 +60,7 @@ Window {
 
     Component.onCompleted: {
         Singleton.debuggerConnection.host = "127.0.0.1"
+        //showMaximized();
     }
 
     Text {
@@ -105,8 +114,7 @@ Window {
         }
         JobTraceViews { id: jobTraceViews}
         RenderViewInspector {  }
-        Rectangle { color: "blue" }
-    }
+     }
 
     BottomBar {
         id: bottomBar

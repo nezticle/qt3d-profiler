@@ -54,6 +54,9 @@ JobTraces JobStatsReader::readTraceFile(const QUrl &fileUrl)
 
         traceEntry.m_title = file.fileName();
 
+        qint64 startTime = std::numeric_limits<qint64>::max();
+        qint64 endTime = std::numeric_limits<qint64>::min();
+
         QVector<quint64> threadIds;
         // Read header
         uint readSize = 0;
@@ -90,9 +93,6 @@ JobTraces JobStatsReader::readTraceFile(const QUrl &fileUrl)
                 }
             }
 
-            qint64 startTime = std::numeric_limits<qint64>::max();
-            qint64 endTime = std::numeric_limits<qint64>::min();
-
             // Get minimum start and maximum end time
             for (const Job &job : jobs) {
                 endTime = std::max(job.m_jobStats.endTime, endTime);
@@ -103,8 +103,6 @@ JobTraces JobStatsReader::readTraceFile(const QUrl &fileUrl)
                 startTime = 0;
             if (endTime == std::numeric_limits<qint64>::min())
                 endTime = startTime;
-
-            traceEntry.m_totalDuration += (endTime - startTime);
 
             // Compute thread count base on thread ids
             for (int i = 0, m = jobs.size(); i < m;) {
@@ -137,9 +135,8 @@ JobTraces JobStatsReader::readTraceFile(const QUrl &fileUrl)
         traceEntry.m_jobModel->insertRows(std::move(frameJobs));
         traceEntry.m_startTime = maxStartTime;
 
-        qDebug() << Q_FUNC_INFO << "Done";
-    } else {
-        qDebug() << Q_FUNC_INFO << "Failure to open";
+        traceEntry.m_totalDuration += (endTime - startTime);
+
     }
     return traceEntry;
 }

@@ -49,8 +49,6 @@ CommandResultReceiver::CommandType CommandResultReceiver::parseCommand(const QJs
     const QString commandNameString = reply.value(QLatin1String("command")).toString().trimmed();
     const QStringList &commandLine = commandNameString.split(' ');
 
-    qDebug() << Q_FUNC_INFO << commandLine;
-
     if (commandLine.last() == QLatin1String("rendercommands"))
         return RenderView;
     return Text;
